@@ -11,13 +11,17 @@ export default function Sidebar({isOpen}){
                 </div>
 
                 <ul className="nav flex-colum mt-3">
-                    <li className="nav-item"><Link className="nav-link" to="">Perfil</Link></li>
-                    <li className="nav-item"><Link className="nav-link" to="">Ventas</Link></li>
-                    <li className="nav-item"><Link className="nav-link" to="">Usuarios</Link></li>
-                    <li className="nav-item"><Link className="nav-link" to="">Categorías</Link></li>
-                    <li className="nav-item"><Link className="nav-link" to="">Proveedores</Link></li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/perfil">Perfil</Link>
+                    </li>
+                    {/* <li className="nav-item"><Link className="nav-link" to="">Ventas</Link></li>
+                    <li className="nav-item"><Link className="nav-link" to="">Usuarios</Link></li> */}
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/Categorias">Categorías</Link>
+                    </li>
+                    {/* <li className="nav-item"><Link className="nav-link" to="">Proveedores</Link></li>
                     <li className="nav-item"><Link className="nav-link" to="">Reportes</Link></li>
-                    <li className="nav-item"><Link className="nav-link" to="">Cerrar sesión</Link></li>
+                    <li className="nav-item"><Link className="nav-link" to="">Cerrar sesión</Link></li> */}
                 </ul>
 
                 <div className="branding mt-auto text-center">
@@ -28,3 +32,6 @@ export default function Sidebar({isOpen}){
         </div>
     );
 }
+
+
+
