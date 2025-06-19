@@ -1,0 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  background-color: rgba(255, 0, 0, 0.1); /* rojo clarito */
+}

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../css/Sidebar.css'; 
+import '../css/Estilos.css'; 
 
 export default function Sidebar({isOpen}){
     return(
