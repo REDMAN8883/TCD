@@ -30,12 +30,12 @@ function Layout(){
 
         <div className="main-content"
         style={{
-          marginLeft: isOpen ? '260px' : '0',
+          marginLeft: isOpen ? '250px' : '0',
           transition: 'margin-left 0.3s ease',
           padding: '4rem 2rem 2rem 2rem',
           minHeight: '100vh',
-          width: isOpen ? 'calc(100vw - 260px)' : '100vw', // Ocupar todo el ancho disponible
-          boxSizing: 'border-box'
+          width: isOpen ? 'calc(100vw - 260px)' : '100vw' // Ocupar todo el ancho disponible
+          
         }}>
         <Outlet />
         </div>

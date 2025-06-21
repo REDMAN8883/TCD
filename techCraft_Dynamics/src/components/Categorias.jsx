@@ -1,4 +1,4 @@
-
+import '../css/Estilos.css';
 
 export default function Categorias(){
     return(

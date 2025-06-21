@@ -3,6 +3,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* ----------------------- */
+/* Estilos del Sidebar/Menu desplegable */
 
 /* Layout principal */
 .app-container {
@@ -12,8 +14,6 @@
 }
 
 .main-content {
-  background-color: #f8f9fa;
-  min-height: 100vh;
   position: relative;
 }
 
@@ -22,7 +22,7 @@
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem  0.75rem ;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1.2rem;
@@ -40,12 +40,13 @@
   left: 0;
   height: 100vh;
   width: 250px;
-  background-color: #cdd2d6;
+  background: linear-gradient(to top, #7df1c4, #4baa86, #349771, #46886f ); /* Color del Sidebar o Menu desplegable */
   color: white;
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   z-index: 999;
   overflow-y: auto;
+  border-right: 1px solid rgb(255, 255, 255);
 }
 
 .sidebar.open {
@@ -62,6 +63,34 @@
   display: flex;
   flex-direction: column;
 }
+/* ----------------------- */
+
+/* Foto y logo del menu */
+.profile-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Esto le da el color del border de abajo de la foto */
+  top: 0;
+  z-index: 10;
+}
+
+.circle-placeholder{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid white;
+  margin-bottom: 0.5rem;
+}
+
+.f-Perfil{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 .logo-placeholder {
   width: 50px;
@@ -69,6 +98,43 @@
   background-color: white;
   margin: 0 auto;
 }
+/* ----------------------- */
+
+/* Items del menu */
+.nav-item{
+  padding: 8px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.nav-link{
+  color: black;
+  width: 100%;
+  display: block; /* Ocupamos el espacio */
+  padding: 0.50rem 1rem;
+  border-radius: 8px; /* Bordes suaves */
+  font-weight: 500; /* Un poco más de grosor */
+  text-decoration: none; /* Quitar subrayado */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover{
+  background-color: #5cb693;
+  color: black;
+}
+
+.link-content{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+/* --------------------------------------- */
+
+
+
 
 .titulo {
   display: flex;
@@ -78,6 +144,8 @@
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
+  border: 1px black solid;
+  border-radius: 10px 0 10px 0;
   background-color: #007bff;
 }
 
