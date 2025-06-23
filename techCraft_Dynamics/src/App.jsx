@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route, Outlet} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Categorias from "./components/Categorias";
 import Perfil from "./components/Perfil";
-import './App.css';
+
 
 
 function Layout(){

@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
-import '../css/Estilos.css'; 
+import '../css/Sidebar.css'; 
+
+// Imagenes
+import  icono from '../assets/IconoTech.png'
 
 export default function Sidebar({isOpen}){
     return(
@@ -82,8 +85,10 @@ export default function Sidebar({isOpen}){
                     </li>
                 </ul>
 
-                <div className="branding mt-auto text-center">
-                    <div className="logo-placeholder mt-3 mb-2"></div>
+                <div className="branding mt-auto">
+                    <div className="logo-placeholder mt-3 mb-2">
+                        <img src={icono} alt="Logo TCD" className="L-tech" />
+                    </div>
                     <p><strong>TECHCRAFT DYNAMICS</strong></p>
                 </div>
             </div>

@@ -15,11 +15,12 @@
 
 .main-content {
   position: relative;
+   background-color: #F3e3e3; 
 }
 
 /* Botón toggle del sidebar */
 .sidebar-toggle-btn {
-  background-color: #007bff;
+  background-color: #4A8F75;
   color: white;
   border: none;
   padding: 0.5rem  0.75rem ;
@@ -30,7 +31,7 @@
 }
 
 .sidebar-toggle-btn:hover {
-  background-color: #0056b3;
+  background-color:#5cb693;
 }
 
 /* Estilos del Sidebar */
@@ -92,17 +93,35 @@
   display: block;
 }
 
-.logo-placeholder {
-  width: 50px;
-  height: 30px;
-  background-color: white;
-  margin: 0 auto;
+.branding{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  z-index: 10;
 }
+.branding, strong{
+  color: white;
+  -webkit-text-stroke: 0.6px rgb(0, 0, 0);
+}
+.logo-placeholder{
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+
+.L-tech{
+  width: 100%;
+  height: 100%;
+  cursor: default !important;
+}
+
+
 /* ----------------------- */
 
 /* Items del menu */
 .nav-item{
-  padding: 8px;
+  padding: 10px;
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
@@ -136,18 +155,7 @@
 
 
 
-.titulo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-  width: 100%;
-  border: 1px black solid;
-  border-radius: 10px 0 10px 0;
-  background-color: #007bff;
-}
+
 
 
 
