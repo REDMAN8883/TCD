@@ -51,6 +51,28 @@
 }
 
 /* Productos mas vendidos del mes */
+.Mejores{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+.Mejores th, td{
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+    color: black;
+}
+.Mejores th{
+    background-color: #632A00;
+    color: #fff;
+    font-size: 16px;
+}
+.Mejores tr:nth-child(even){
+    background-color: #f4f4f4;
+}
+.Mejores tr:hover {
+    background-color: #e8f8ff;
+}
 .mas-vendidos {
     padding: 20px;
     background-color: #fff7f7;
@@ -59,6 +81,7 @@
     margin: 0 auto;
     width: 100%;
 }
+
 .Mas-V {
     font-size: 24px;
     font-weight: bold;
@@ -66,13 +89,11 @@
     text-align: center;
     margin-bottom: 20px;
 }
-
 .galeria-productos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
-
 .producto {
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -82,12 +103,10 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
 }
-
 .producto:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-
 .I-producto{
     max-width: 100%;
     height: auto;
@@ -96,16 +115,6 @@
     cursor: default !important;
 }
 
-.producto, h3, p{
-   font-size: 18px;
-font-weight: bold;
-color: #2c3e50;
-margin-bottom: 8px; 
-
-font-size: 16px;
-color: #27ae60;
-font-weight: bold;
-}
 
 /* Productos menos vendidos del mes */
 .menos-vendidos {
@@ -115,11 +124,42 @@ font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 10px;
 }
-
 .Menos-V {
     font-size: 24px;
     font-weight: bold;
     color: #2c3e50;
     text-align: center;
     margin-bottom: 20px;
+}
+.Peores{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    }
+.Peores th, td{
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+    color: black;
+}
+.Peores th{
+    background-color: #632A00;
+    color: #fff;
+    font-size: 16px;
+}
+.Peores tr:nth-child(even){
+    background-color: #ffecec; 
+}
+.Peores tr:hover {
+    background-color: #fddede; 
+}
+.producto, h3, p{
+       font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 8px; 
+    
+    font-size: 16px;
+    color: #27ae60;
+    font-weight: bold;
 }

@@ -3,46 +3,22 @@ import '../css/Categorias.css'
 export default function Categorias(){
     return(
         <>
-            <h1 className="titulo">CATEGORIAS</h1>   
+            <h1 className="titulo">CATEGORíAS</h1>   
             {/* Contenedor trasero */}
             <main className="contenedor-principal">
                 <button className="G-categorias">Gestionar categorias</button>
                     
                 <div className="Tabla">
 
-                    {/* Es mejor ponerlo solo cuando se le de click a la gestion */}
-                        {/* Actualizar la tabla a map */}
-                    {/* <table>
-                        <thead>
-                            <tr>
-                                <th>Categoria</th>
-                                <th>Imagen</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Categoria 1</td>
-                                <td>Imagen</td>
-                                <td><button>Editar</button></td>
-                                <td><button>Eliminar</button></td>
-                            </tr>
-                            <tr>
-                                <td>Categoria 2</td>
-                                <td>Imagen</td>
-                                <td><button>Editar</button></td>
-                                <td><button>Eliminar</button></td>
-                            </tr>
-                        </tbody>
-                    </table> */}
+                
                 </div>
                         {/* Seccion donde se visualiza los productos mas vendidos 4xC.U */}
                 
                     <section id="mas-vendidos" className="mas-vendidos">
                         <h2 className="Mas-V">Productos Más Vendidos</h2>           
                         
-                        {/* <table>
+                        {/* Tabla para pasar a map */}
+                        <table  className="Mejores">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -67,7 +43,7 @@ export default function Categorias(){
                                     <td>$120,000</td>
                                 </tr>
                             </tbody>
-                        </table> */}
+                        </table>
 
                         <div className="galeria-productos">
                             <div className="producto">
@@ -96,7 +72,8 @@ export default function Categorias(){
                 <section id="menos-vendidos" className="menos-vendidos">
                     <h2 className="Menos-V">Productos Menos Vendidos</h2>
 
-                    {/* <table>
+                    {/* Tabla para pasar a map */}
+                    <table className="Peores">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -122,7 +99,7 @@ export default function Categorias(){
                             </tr>
                             
                         </tbody>
-                    </table> */}
+                    </table>
 
                     <div className="galeria-productos">
                         <div className="producto">
