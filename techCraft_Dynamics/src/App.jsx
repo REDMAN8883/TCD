@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {BrowserRouter, Routes, Route, Outlet} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Categorias from "./components/Categorias";
+import ListarCategorias from "./components/listarCategorias";
 
 
 
@@ -49,7 +50,7 @@ export default function App(){
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="Categorias" element={<Categorias />} />
-          {/* <Route path="Perfil" element={<Perfil />} />  */}
+          <Route path="Categorias/Listado" element={<ListarCategorias />} />
         </Route>
       </Routes>
     </BrowserRouter>

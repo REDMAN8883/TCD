@@ -13,6 +13,8 @@ export default function Sidebar({isOpen}){
                         <img src="" alt="foto perfil" className="f-Perfil" />
                     </div>
                     <h6 className="mt-2">ROL</h6>
+                    <h6 className="mt-2">Nombre</h6>
+
                 </div>
 
                 <ul className="nav flex-colum mt-3">

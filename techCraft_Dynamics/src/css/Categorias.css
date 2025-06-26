@@ -18,7 +18,7 @@
     color: #000000;
 }
 
-/* Esto es el contido principal de atras de todo */
+/* Esto es el contido principal de atras de todo */ 
 .contenedor-principal{
     flex: 1;
     padding: 20px;
@@ -29,10 +29,14 @@
 
 /* Boton para ir a gestionar categorias */
 .G-categorias{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
     background-color: #4A8F75; 
-    color: black border solid; 
+    color: black; 
     border: none;
-    padding: 12px 20px;
+    padding: 0.75rem 1.5rem;
     font-size: 16px;
     font-weight: bold;
     border-radius: 8px;
