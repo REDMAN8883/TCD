@@ -1,8 +1,13 @@
+// Importaciones de rutas etc.
 import { useState } from 'react';
 import {BrowserRouter, Routes, Route, Outlet} from "react-router-dom";
+// importaciones de componentes
 import Sidebar from "./components/Sidebar";
 import Categorias from "./components/Categorias";
 import ListarCategorias from "./components/listarCategorias";
+// import Edicion from "./components/Edicion";
+import Subcategoria from './components/SubCategorias';
+import Agregar from './components/AgregarCategorias';
 
 
 
@@ -51,6 +56,11 @@ export default function App(){
         <Route path="/" element={<Layout />}>
           <Route path="Categorias" element={<Categorias />} />
           <Route path="Categorias/Listado" element={<ListarCategorias />} />
+          <Route path="Agregar-Categorias" element={<Agregar />} />
+          <Route path="Categoria/:nombreCategoria" element={<Subcategoria />} />
+          
+          {/* <Route path="Accessorios" element={<Edicion />} /> */}
+          
         </Route>
       </Routes>
     </BrowserRouter>

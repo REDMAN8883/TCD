@@ -49,10 +49,7 @@
     background-color: #2fa779; 
     transform: scale(1.05);
 }
-.G-categorias:active{
-    background-color: #004099; 
-    transform: scale(0.98);
-}
+
 
 /* Productos mas vendidos del mes */
 .Mejores{

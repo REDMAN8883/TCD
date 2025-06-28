@@ -6,7 +6,7 @@ import  icono from '../assets/IconoTech.png'
 
 export default function Sidebar({isOpen}){
     return(
-        <div className={`sidebar ${isOpen ? 'open' : 'collapsed'}`}>
+        <div className={`sidebar ${isOpen ? 'open' : 'collapsed'}`} >
             <div className="sidebar-content">
                 <div className="profile-section">
                     <div className="circle-placeholder">
@@ -67,6 +67,7 @@ export default function Sidebar({isOpen}){
                             </div>
                         </Link>
                     </li>
+
                     {/* Ruta para ir a reportes */}
                     <li className="nav-item">
                         <Link className="nav-link" to="">
@@ -86,7 +87,7 @@ export default function Sidebar({isOpen}){
                         </Link>
                     </li>
                 </ul>
-
+                    {/* Este solo es icono de nosotros con su nombre  */}
                 <div className="branding mt-auto">
                     <div className="logo-placeholder mt-3 mb-2">
                         <img src={icono} alt="Logo TCD" className="L-tech" />
