@@ -1,15 +1,16 @@
 // Importaciones de rutas etc.
 import { useState } from 'react';
 import {BrowserRouter, Routes, Route, Outlet} from "react-router-dom";
+
 // importaciones de componentes
-import Sidebar from "./components/Sidebar";
-import Categorias from "./components/Categorias";
-import ListarCategorias from "./components/listarCategorias";
-// import Edicion from "./components/Edicion";
-import Subcategoria from './components/SubCategorias';
-import Agregar from './components/AgregarCategorias';
+import Sidebar from "./components/Sidebar"; // Menu desplegable
+import Categorias from "./components/Categorias"; // Categorias
+import ListarCategorias from "./components/listarCategorias"; // Listado de categorias
+import Subcategoria from './components/SubCategorias'; // Subcategorias
 
-
+// Importaciones de las carpetas formsAdd y formsEdit
+import Agregar from './components/formsAdd/Agregar';
+import Editar from './components/formsEdit/Editar';
 
 
 function Layout(){
@@ -49,17 +50,24 @@ function Layout(){
   );
 }
 
+// Layout
+// Zona importante ya que aca se maneja las rutas para el fronted
 export default function App(){
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+          {/* Rutas normales */}
           <Route path="Categorias" element={<Categorias />} />
           <Route path="Categorias/Listado" element={<ListarCategorias />} />
-          <Route path="Agregar-Categorias" element={<Agregar />} />
+
+          {/* Ruta para ir a la subcategoria deseada */}
           <Route path="Categoria/:nombreCategoria" element={<Subcategoria />} />
+
+          {/* Rutas para elejir que va agregar y que va editar */}
+          <Route path="agregar/:tipo" element={<Agregar />} />
+          <Route path="editar/:tipo" element={<Editar />} />
           
-          {/* <Route path="Accessorios" element={<Edicion />} /> */}
           
         </Route>
       </Routes>

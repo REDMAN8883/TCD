@@ -16,7 +16,7 @@ export default function ListarCategorias(){
              
             <main className="contenedor-principal">
                 {/* Boton para ir a agregar categorias */}
-                    <Link to="/Agregar-Categorias" >
+                    <Link to="/agregar/categoria" >
                         <button className="A-categorias">Agregar categoria nueva</button>
                     </Link>
                     
@@ -30,8 +30,6 @@ export default function ListarCategorias(){
                                 <th>Imagenes</th>
                                 <th>Nombres</th>
                                 <th>SubCategorías</th>
-                                <th>Precio</th>
-                                <th>Cantidadades</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
@@ -46,12 +44,12 @@ export default function ListarCategorias(){
                                 <td>
                                     <Link to={`/categoria/${cat.nombre}`}>{cat.nombre}</Link>
                                 </td>
-                                <td>${Number(cat.precio).toLocaleString()}</td>
-                                <td>{cat.cantidad}</td>
                                 <td>
-                                    <button className="btn btn-success btn-sm d-flex justify-content-center align-items-center mx-auto">
-                                        <i className='bx bx-edit'></i>
-                                    </button>
+                                    <Link to="/editar/categoria">
+                                        <button className="btn btn-success btn-sm d-flex justify-content-center align-items-center mx-auto">
+                                            <i className='bx bx-edit'></i>
+                                        </button>
+                                    </Link>
                                 </td>
                                 <td>
                                     <button className="btn btn-danger btn-sm d-flex justify-content-center align-items-center mx-auto">
