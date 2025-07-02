@@ -89,13 +89,7 @@ return(
                                             <label className="form-label">Código de barras:</label>
                                             <input type="number" id="number" className="form-control" placeholder="0000000"/>
 
-                                            <div className="mb-3">
-                                                {/* Seleccion de subcategorias */}
-                                                <label className="form-label">Tipo de subcategoría: <span className="span">*</span></label>
-                                                <select id="tipo" className="form-control">
-                                                <option value="">--Selecciona un opción--</option>
-                                                </select>
-                                            </div>
+                                            
 
                                             {/* Descripcion del producto */}
                                             <label className="form-label">Descripción:</label>
@@ -155,13 +149,6 @@ return(
                                         <input type="text" id="nombre" className="form-control" />
                                         </div>
 
-                                        {/* Selección de tipo */}
-                                        <div className="mb-3">
-                                        <label className="form-label">Tipo de subcategoría: <span className="span">*</span></label>
-                                        <select id="tipo" className="form-control">
-                                            <option value="">--Selecciona un opción--</option>
-                                        </select>
-                                        </div>
                                     </div>
 
                                     {/* Columna derecha */}
