@@ -9,12 +9,12 @@ import ListarCategorias from "./components/listarCategorias"; // Listado de cate
 import Subcategoria from './components/SubCategorias'; // Subcategorias
 
 // Importaciones de las carpetas formsAdd y formsEdit
-import Agregar from './components/formsAdd/Agregar';
-import Editar from './components/formsEdit/Editar';
+import Agregar from './components/formsAdd/Agregar'; // Componentes para agregar (Categorias, Subcategorias y productos)
+import Editar from './components/formsEdit/Editar'; // Componentes para editar (Categorias, Subcategorias y productos)
 
 
 function Layout(){
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); {/* Comienza el sidebar cerrado */}
 
   return (
     <div className="app-container">
