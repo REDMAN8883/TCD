@@ -7,8 +7,8 @@ router.post('/', productoCtrl.crearProductoGramaje);
 router.post('/', productoCtrl.crearProductoPaquetes);
 
 // Rutas para enlistar los productos de paquetes y gramajes.
-router.get('/', productoCtrl.listarProductosGramaje);
-router.get('/', productoCtrl.listarProductosPaquetes);
+router.get('/gramaje', productoCtrl.listarProductosGramaje);
+router.get('/paquete', productoCtrl.listarProductosPaquetes);
 
 // Rutas para actualizar los productos de paquetes y gramaje.
 router.put('/:id', productoCtrl.actualizarProductosGramaje);
@@ -17,3 +17,5 @@ router.put('/:id', productoCtrl.actualizarProductosPaquetes);
 // Rutas para eliminar los productos de paquetes y gramaje.
 router.delete('/:id', productoCtrl.eliminarProductosGramaje);
 router.delete('/:id', productoCtrl.eliminarProductosPaquetes);
+
+module.exports = router;

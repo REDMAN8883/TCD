@@ -19,7 +19,8 @@ const crearSubcategorias = (req, res) =>{
 const listarSubcatgeorias = (req, res) => {
     db.query("SELECT * FROM SubCategorias", (err, rows) => {
         if (err) return res.status(500).json({ erro: err.message });
-        res.status(201).json({ error: err.message });
+        res.status(200).json(rows); // enviar los datos
+
     });
 };
 

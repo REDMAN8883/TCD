@@ -15,7 +15,7 @@ db.connect((err) =>{
     if(err){
         console.error('Error de conexion a MYSQL: ', err); // Error por si falla la conexion.
     } else {
-        console.log('Conectando a al base de datos MYSQL.'); // Mensaje exitoso con la conexion.
+        console.log('Conectado a al base de datos MYSQL.'); // Mensaje exitoso con la conexion.
     }
 })
 

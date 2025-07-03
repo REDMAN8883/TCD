@@ -1,5 +1,9 @@
+// importaciones de link, etc..
 import { Link, useNavigate } from 'react-router-dom';
-import { categorias } from '../data/data.js';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'; 
+
+// importaciones de css
 import '../css/ListarCategorias.css';
 
 
@@ -8,17 +12,49 @@ export default function ListarCategorias(){
     // Uso de las constantes 
     const navigate = useNavigate();
 
+    const [categoriasLista, setCategoriasLista] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
+
+    useEffect(() => {
+        getCategorias();
+
+    }, []);
     
+    const getCategorias = async () => {
+    try {
+        const res = await axios.get('http://localhost:3000/api/categorias');
+        console.log("Datos recibidos:", res.data); 
+        console.log("Primer elemento:", res.data[0]); 
+        console.log("Claves del primer elemento:", Object.keys(res.data[0] || {})); 
+        setCategoriasLista(res.data);
+        } catch (error) {
+        console.error("Error al obtener categorías:", error);
+        }
+    };
+
+    const categoriasFiltradas = categoriasLista.filter((cate) => 
+        cate.Nombre_categoria && cate.Nombre_categoria.toLowerCase().includes(busqueda.toLowerCase())
+    );
 
     return(
         <>
             <h1 className="titulo">CATEGORíAS</h1>  
-             
+
             <main className="contenedor-principal">
                 {/* Boton para ir a agregar categorias */}
                     <Link to="/agregar/categoria" >
                         <button className="A-categorias">Agregar categoria nueva</button>
                     </Link>
+
+                    <div className="ms-auto">
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Buscar..."
+                            value={busqueda}
+                            onChange={e => setBusqueda(e.target.value)}
+                        />
+                    </div>
                     
                 <section  className="Listado">
 
@@ -36,16 +72,17 @@ export default function ListarCategorias(){
                         </thead>
                         <tbody>
                             {/* Aca se hace el tipo bucle para traer todas las categorias */}
-                            {categorias.map((cat)=>
+                            {categoriasFiltradas.map((cat)=>
                             // La llave va ser por su id
                             <tr key={cat.id}>
-                                <td><img src={cat.imagen} alt={cat.imagen} width="50%" /></td>
-                                <td>{cat.nombre}</td>
+                                <td><img src={`http://localhost:3000/uploads/${cat.Imagen_categoria}`}
+                                    alt={cat.Nombre_categoria} width="50%" /></td>
+                                <td>{cat.Nombre_categoria}</td>
                                 <td>
-                                    <Link to={`/categoria/${cat.nombre}`}>{cat.nombre}</Link>
+                                    <Link to={`/categoria/${cat.Nombre_categoria}`}>{cat.Nombre_categoria}</Link>
                                 </td>
                                 <td>
-                                    <Link to="/editar/categoria">
+                                    <Link to={`/editar/categoria/${cat.id}`}>
                                         <button className="btn btn-success btn-sm d-flex justify-content-center align-items-center mx-auto">
                                             <i className='bx bx-edit'></i>
                                         </button>

@@ -32,7 +32,7 @@ const crearProductoGramaje = (req, res) => {
 const listarProductosPaquetes = (req, res) => {
     db.query("SELECT * FROM ProductosPaquetes", (err, rows) => {
         if(err) res.status(500).json({ error: err.message });
-        res.status(201).json({ error: err.message });
+        res.status(200).json(rows); // enviar los datos
     });
 };
 
@@ -40,7 +40,7 @@ const listarProductosPaquetes = (req, res) => {
 const listarProductosGramaje = (req, res) => {
     db.query("SELECT * FROM ProductosGramaje", (err, rows) => {
         if(err) res.status(500).json({ error: err.message });
-        res.status(201).json({ error: err.message });
+        res.status(200).json(rows); // enviar los datos
     });
 };
 

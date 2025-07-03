@@ -4,7 +4,8 @@ const db = require('../config/db');
 // Creamos las categorias, insertamos los nuevos datos.
 const crearCategorias = (req, res) => {
     // Variable para pedir la informacion del formulario.
-    const { Imagen_categoria, Nombre_categoria, Descripcion } = req.body;
+    const { Nombre_categoria, Descripcion } = req.body;
+    const Imagen_categoria = req.file ? req.file.filename : null;
     const query =   
         `INSERT INTO Categorias ( Imagen_categoria, Nombre_categoria, Descripcion) 
         VALUES ( ?, ?, ?)`; // Insercion de los datos a la base de datos.
@@ -19,9 +20,10 @@ const crearCategorias = (req, res) => {
 
 
 const listarCategorias = (req, res) => {
-    db.query("SELECT * FROM Catgeorias", (err, rows) => { // Traemos todas las categorias exitentes en las bases de datos.
-        if(err) return res.status(500).json({ error: err.message});
-        res.status(201).json({ error: err.message })
+    db.query("SELECT * FROM Categorias", (err, rows) => { // Traemos todas las categorias exitentes en las bases de datos.
+        if(err) {return res.status(500).json({ error: err.message});
+        } 
+        res.status(200).json(rows);  
     });
 };
 

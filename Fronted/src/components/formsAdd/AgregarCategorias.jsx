@@ -1,20 +1,87 @@
+// importaciones de rutas etc..
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState } from 'react'; // Hook para manejar los estados de los componentes.
+import axios from 'axios'; // peticiones por HTTPS:
+
+// importaciones de css 
 import '../../css/Agregar.css';
 
 export default function AgregarCategoria(){
 
     // Constantes en uso para logicas
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Regresar una pagina
+    const [imagenFormulario2, setImagenFormulario2] = useState(null); // capturar la imagen necesaria
+    const [selectedFile, setSelectedFile] = useState(null); // Captura el archvio real
+    const [isSubmitting, setIsSubmitting] = useState(false); // Esto desabilita el boton de guardar
+    const [error, setError] = useState(null); // Guarda mensaje de error
 
-    const [imagenFormulario2, setImagenFormulario2] = useState(null);
+    
+    // Usando el useState para el formulario.
+    const [values, setValues] = useState({
+        Nombre_categoria: "",
+        Descripcion: "",
+        
+    });
 
+    // funcion para capturar la imagen
     const handleImagenChange2 = (e) => {
-        const file = e.target.files[0];
+        const file = e.target.files[0]; // Accede primnero al archivo seleccionado
         if (file){
-            setImagenFormulario2(URL.createObjectURL(file))
+            setImagenFormulario2(URL.createObjectURL(file)); // crear una URL temporal
+            setSelectedFile(file); // aca captura la imagen realmente.
+        }else {
+            alert("Por favor selecciona un archivo de imagen válido.");
         }
     }
+
+    // El handleChange dice que va a ser cada useState.
+    const handleChange = (event) => {
+        const {name, value} = event.target; // Se extraen las propiedades de los inputs 
+        setValues({ // Se actualiza el estado pero sin perder los valores anteriores.
+            ...values,
+            [name]: value // Se usa como clave dinamica
+        })
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // aca no se recarga la pagina una vez ingresado los datos.
+
+        console.log('Valores del formulario:', values); // ← Agrega esto
+        console.log('Archivo seleccionado:', selectedFile); // ← Y esto
+
+        setIsSubmitting(true); // Aca indica que se envio el formulario
+        setError(null); // Limpia los errores anteriores.
+
+        const formData = new FormData(); // Sirve para enviar datos de formularios 
+        formData.append('Nombre_categoria', values.Nombre_categoria); // el append sirve para agregar el campo al formulario
+        formData.append('Descripcion', values.Descripcion);
+        if (selectedFile){
+            formData.append('imagen', selectedFile);
+        }
+
+        try {
+            const response = await axios.post('http://localhost:3000/api/Categorias', formData,{ // Envia los datos de modo post
+                onUploadProgress: progressEvent => {
+                    const percentCompleted = Math.round(
+                        (progressEvent.loaded * 100) / progressEvent.total
+                    );
+                    console.log(percentCompleted);
+                }
+            });
+
+            console.log('Categoria guardada:', response.data); // Son los datos devueltos por el servidor.
+            navigate('/Categorias/Listado', {
+                state: { message: 'Categoria creada con exito' }
+            });
+        } catch (err){ // Se capturan errores de las peticiones.
+            console.error('Error al guardar', err);
+            setError(err.response?.data?.message || 'Error al guardar la categoria'); // aca solo si existe el mensaje de error ingresa
+        }finally{
+            setIsSubmitting(false); // Siempre se va a ejecutar haya o no error
+        }
+    }
+
+
     return (
         <>  
             {/* Titulo */}
@@ -23,7 +90,11 @@ export default function AgregarCategoria(){
             {/* Contenedor trasero */}
             <main className="contenedor-principal">
                 <div className="datos card p-4 shadow">
-
+                    {error && (
+                        <div className="alert alert-danger">
+                            {error}
+                        </div>
+                    )}
                     {/* Imagen con su informacion */}
                     <div className="row mb-4 align-items-center ">
                         <div className="col-md-4 text-center  imagen">
@@ -49,33 +120,33 @@ export default function AgregarCategoria(){
                                     )}
                             </div>
                             <label className="btn btn-primary btn-sm">Seleciona una imagen
-                                                <input type="file" accept="image/" onChange={handleImagenChange2} hidden />
+                                                <input type="file" accept="image/*" onChange={handleImagenChange2} hidden />
                             </label>
                         </div>
 
                                 {/* Los inputs van a la derecha */}
                         <section className="col-md-8 formulario">
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div className="row">
                                     <div className="col-md-6">
 
                                         {/* Nombre de la categoria */}
                                         <div className="mb-3">
                                             <label className="form-label">Nombre de la categoría: <span className="span">*</span></label>
-                                            <input type="text" id="N-Categorias" className="form-control" />
+                                            <input type="text" id="N-Categorias" className="form-control" name="Nombre_categoria" value={values.Nombre_categoria} onChange={handleChange} required/>
                                         </div>
 
                                         {/* Descripcion de la categoria */}
                                         <div className="mb-3 peticiones">
                                             <label className="form-label">Descripción:</label>
-                                            <textarea className="form-control" id="D-Categorias" name="descripcion" rows="4" placeholder="Escribe una descripcion aqui..."></textarea>
+                                            <textarea className="form-control" id="D-Categorias" name="Descripcion" value={values.Descripcion} onChange={handleChange} rows="4" placeholder="Escribe una descripcion aqui..."></textarea>
                                         </div>
                                         </div>
                                     </div>
 
                                     {/* Botones */}
                                     <div className="d-flex justify-content-center gap-3 mt-4">
-                                        <button type="submit" className="btn btn-success">Guardar</button>
+                                        <button type="submit" className="btn btn-success" disabled={isSubmitting}>{isSubmitting ? 'Guardando...' : 'Guardar'}</button>
                                         <button type="button" className="btn btn-danger" onClick={() => navigate(-1)}>Regresar</button>
                                     </div>
                             </form>
