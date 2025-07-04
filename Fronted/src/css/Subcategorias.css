@@ -53,7 +53,8 @@
     transform: scale(1.05);
 }
 .botones-sub{
-    display: flex;
+    display: none;
+    justify-content: center;
     gap: 8px;
 }
 .botones-sub button {
@@ -62,6 +63,9 @@
     justify-content: center;
     padding: 4px 6px;
     border-radius: 4px;
+}
+.B-Subcategorias:hover .botones-sub {
+    display: flex;
 }
 
 /* Apartado de productos */

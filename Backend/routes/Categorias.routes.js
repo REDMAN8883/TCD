@@ -23,9 +23,12 @@ router.post('/', upload.single('imagen'), categoriasCtrl.crearCategorias);
 router.get('/', categoriasCtrl.listarCategorias); 
 
 // ruta que donde dependiendo del "id" va actualizar la categoria correspondiente.
-router.put('/:id', categoriasCtrl.actualizarCategorias);
+router.put('/:id', upload.single('imagen'), categoriasCtrl.actualizarCategorias);
 
  // ruta que donde dependiendo del "id" va eliminar la categoria correspondiente.
-router.delete('/:id', categoriasCtrl.eliminarCategorias);
+router.delete('/delete/:id', categoriasCtrl.eliminarCategorias);
+
+//Para traer por id las categorias
+router.get('/:id', categoriasCtrl.obtenerCategoriaPorId);
 
 module.exports = router;

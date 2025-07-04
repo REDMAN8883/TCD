@@ -20,7 +20,7 @@ const crearCategorias = (req, res) => {
 
 
 const listarCategorias = (req, res) => {
-    db.query("SELECT * FROM Categorias", (err, rows) => { // Traemos todas las categorias exitentes en las bases de datos.
+    db.query("SELECT * FROM Categorias WHERE activo = 1", (err, rows) => { // Traemos todas las categorias exitentes en las bases de datos.
         if(err) {return res.status(500).json({ error: err.message});
         } 
         res.status(200).json(rows);  
@@ -28,24 +28,49 @@ const listarCategorias = (req, res) => {
 };
 
 const actualizarCategorias = (req, res) => {
-    const {id} = req.params; // 
-    const { Imagen_categoria, Nombre_categoria, Descripcion} = req.body;
-    const query = 
-        `UPDATE Categorias
-        SET Imagen_categoria=?, Nombre_categoria=?, Descripcion=? WHERE id=?`; // Actualizamos todos los datos exitentes dependiendo del id 
+    const { id } = req.params;
+    const { Nombre_categoria, Descripcion } = req.body;
+
+    let Imagen_categoria;
+
+    // Si llega una imagen nueva, la usamos; si no, usamos la que ya estaba
+    if (req.file) {
+        Imagen_categoria = req.file.filename;
+    } else if (req.body.Imagen_categoria) {
+        Imagen_categoria = req.body.Imagen_categoria;
+    } else {
+        Imagen_categoria = null; // o dejarlo sin actualizar si prefieres
+    }
+
+    const query = `
+        UPDATE Categorias
+        SET Imagen_categoria = ?, Nombre_categoria = ?, Descripcion = ?
+        WHERE id = ?`;
+
     const values = [Imagen_categoria, Nombre_categoria, Descripcion, id];
 
-    db.query(query, values, (err, result) =>{
+    db.query(query, values, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.status(201).json({ error: err.message })
+        res.status(200).json({ message: "Categoría actualizada correctamente" });
+    });
+};
+
+const obtenerCategoriaPorId = (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT * FROM Categorias WHERE id = ? AND activo = 1';
+
+    db.query(query, [id], (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (results.length === 0) return res.status(404).json({ mensaje: 'Categoría no encontrada' });
+        res.json(results[0]); // devolvemos solo un objeto, no un array
     });
 };
 
 const eliminarCategorias = (req, res) => {
     const {id} = req.params;
-    db.query("DELETE FROM Categorias WHERE id =?", [id], (err) =>{  // Eliminamos la categoria dependiendo del "ID". 
+    db.query("UPDATE Categorias SET activo = 0 WHERE id =?", [id], (err) =>{  // Usamo el soft delete para desactivar y no eliminar. 
         if (err) return res.status(500).json({ error: err.message });
-        res.json({message: 'La categoria ha sido eliminado exitosamente' });
+        res.json({message: 'La categoria ha sido desactivada (soft delete).' });
     });
 };
 
@@ -54,5 +79,6 @@ module.exports = {
     crearCategorias,
     listarCategorias,
     actualizarCategorias,
+    obtenerCategoriaPorId,
     eliminarCategorias
 };

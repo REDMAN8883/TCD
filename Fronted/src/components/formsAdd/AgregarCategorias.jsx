@@ -2,6 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react'; // Hook para manejar los estados de los componentes.
 import axios from 'axios'; // peticiones por HTTPS:
+import Swal from 'sweetalert2'; // Para hacer alertas en guardar o eliminar o editar
 
 // importaciones de css 
 import '../../css/Agregar.css';
@@ -43,15 +44,20 @@ export default function AgregarCategoria(){
         })
     }
 
+    
+    // Manda los datos del formulario a la base de datos.
     const handleSubmit = async (event) => {
         event.preventDefault(); // aca no se recarga la pagina una vez ingresado los datos.
-
-        console.log('Valores del formulario:', values); // ← Agrega esto
-        console.log('Archivo seleccionado:', selectedFile); // ← Y esto
-
         setIsSubmitting(true); // Aca indica que se envio el formulario
         setError(null); // Limpia los errores anteriores.
 
+        const {Nombre_categoria} = values;
+
+        if(!Nombre_categoria.trim()){
+            setIsSubmitting(false);
+            return Swal.fire('Campo obligatorio', 'El nombre de la categoría es requerido.', 'warning');
+            }
+        
         const formData = new FormData(); // Sirve para enviar datos de formularios 
         formData.append('Nombre_categoria', values.Nombre_categoria); // el append sirve para agregar el campo al formulario
         formData.append('Descripcion', values.Descripcion);
@@ -80,6 +86,20 @@ export default function AgregarCategoria(){
             setIsSubmitting(false); // Siempre se va a ejecutar haya o no error
         }
     }
+
+            const handleCancelar = (e) => {
+                e.preventDefault();
+                Swal.fire({
+                title: 'Cancelado.',
+                text: 'El proceso se canceló con éxito.',
+                icon: 'warning',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                }).then(() => {
+                navigate(-1);
+                });
+            };
 
 
     return (
@@ -133,7 +153,11 @@ export default function AgregarCategoria(){
                                         {/* Nombre de la categoria */}
                                         <div className="mb-3">
                                             <label className="form-label">Nombre de la categoría: <span className="span">*</span></label>
-                                            <input type="text" id="N-Categorias" className="form-control" name="Nombre_categoria" value={values.Nombre_categoria} onChange={handleChange} required/>
+                                            <input type="text" 
+                                            id="N-Categorias" 
+                                            className="form-control" 
+                                            name="Nombre_categoria" 
+                                            value={values.Nombre_categoria} onChange={handleChange} />
                                         </div>
 
                                         {/* Descripcion de la categoria */}
@@ -147,7 +171,7 @@ export default function AgregarCategoria(){
                                     {/* Botones */}
                                     <div className="d-flex justify-content-center gap-3 mt-4">
                                         <button type="submit" className="btn btn-success" disabled={isSubmitting}>{isSubmitting ? 'Guardando...' : 'Guardar'}</button>
-                                        <button type="button" className="btn btn-danger" onClick={() => navigate(-1)}>Regresar</button>
+                                        <button type="button" className="btn btn-danger" onClick={handleCancelar}>Cancelar</button>
                                     </div>
                             </form>
                         </section>

@@ -3,8 +3,8 @@ const router = express.Router();
 const productoCtrl = require('../controllers/Productos.controller');
 
 // Rutas  para crear los productos de paquetes y gramajes.
-router.post('/', productoCtrl.crearProductoGramaje);
-router.post('/', productoCtrl.crearProductoPaquetes);
+router.post('/gramaje', productoCtrl.crearProductoGramaje);
+router.post('/paquete', productoCtrl.crearProductoPaquetes);
 
 // Rutas para enlistar los productos de paquetes y gramajes.
 router.get('/gramaje', productoCtrl.listarProductosGramaje);

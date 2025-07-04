@@ -10,16 +10,16 @@ import { useParams } from 'react-router-dom';
 
 
 export default function Agregar(){
-    const { tipo } = useParams(); // Vamos a capturar los componentes 'Categoria', 'Subcategoria' y 'Producto' todo eso para agregar 
+    const { tipo, id } = useParams(); // Vamos a capturar los componentes 'Categoria', 'Subcategoria' y 'Producto' todo eso para agregar 
 
     const renderFormulario = () =>{
         switch (tipo){
             case 'categoria':
-                return <EditarCategoria />;
+                return <EditarCategoria id={id} />;
             case 'subcategoria':
-                return <EditarSubcategoria />;
+                return <EditarSubcategoria id={id} />;
             case 'producto':
-                return <EditarProducto />;
+                return <EditarProducto id={id} />;
             default:
                 return <p>El tipo de dato no es valido</p>
         }

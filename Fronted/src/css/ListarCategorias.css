@@ -62,8 +62,10 @@
 .bx {
     font-size: 1.2rem;
     width: 50px;
+    
 }
 .btn{
+    
     background-color: #4A8F75;
     border: #4A8F75;
 }
@@ -86,4 +88,37 @@
 .Regresar:hover{
     background-color: #2fa779;
     transform: scale(1.05);
+}
+
+/* Imagen de la tabla */
+.Imagen{
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    border: 1px solid #4A8F75;
+    cursor: default;
+}
+.Imagen:hover{
+    transform: scale(1.05);
+    transition: 0.5s;
+    cursor: default;
+}
+.td{
+    display: flex;
+    justify-content: center;
+}
+
+/* estilo de subcategoria */
+.L-subcategoria{
+    color: black;
+    text-decoration:underline;
+}
+#Buscar{
+    margin-bottom: 10px;
+    width: 40%;
+    
+}
+.ms-auto{
+    display: flex;
+    flex-direction: row-reverse;
 }

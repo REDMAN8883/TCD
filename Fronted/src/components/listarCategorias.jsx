@@ -1,6 +1,7 @@
 // importaciones de link, etc..
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import axios from 'axios'; 
 
 // importaciones de css
@@ -11,27 +12,47 @@ export default function ListarCategorias(){
 
     // Uso de las constantes 
     const navigate = useNavigate();
-
     const [categoriasLista, setCategoriasLista] = useState([]);
     const [busqueda, setBusqueda] = useState("");
 
+    // Captura la informacion
     useEffect(() => {
         getCategorias();
 
     }, []);
     
+    // LLamado al bases de datos para en listar mas adelante
     const getCategorias = async () => {
     try {
         const res = await axios.get('http://localhost:3000/api/categorias');
-        console.log("Datos recibidos:", res.data); 
-        console.log("Primer elemento:", res.data[0]); 
-        console.log("Claves del primer elemento:", Object.keys(res.data[0] || {})); 
         setCategoriasLista(res.data);
         } catch (error) {
         console.error("Error al obtener categorías:", error);
         }
     };
 
+    // Alerta al borrar categoria
+    const deleteCate = (id) => {
+        Swal.fire({
+            title: "¿Estas segur@ de eliminar esta categoría?",
+            text: "!No podras deshacer esta accion!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed){
+                axios.delete(`http://localhost:3000/api/categorias/delete/${id}`)
+                .then(() =>{
+                    getCategorias();
+                    Swal.fire("Eliminado", "Categoria eliminada con exito", "success");
+                })
+                .catch(err => Swal.fire('Error al eliminar', err.message, 'error'));
+            }
+        });
+    };
+
+    // Buscador, filtra lo que uno busca en la tabla en base a el nombre.
     const categoriasFiltradas = categoriasLista.filter((cate) => 
         cate.Nombre_categoria && cate.Nombre_categoria.toLowerCase().includes(busqueda.toLowerCase())
     );
@@ -50,6 +71,7 @@ export default function ListarCategorias(){
                         <input
                             type="text"
                             className="form-control"
+                            id="Buscar"
                             placeholder="Buscar..."
                             value={busqueda}
                             onChange={e => setBusqueda(e.target.value)}
@@ -75,11 +97,11 @@ export default function ListarCategorias(){
                             {categoriasFiltradas.map((cat)=>
                             // La llave va ser por su id
                             <tr key={cat.id}>
-                                <td><img src={`http://localhost:3000/uploads/${cat.Imagen_categoria}`}
-                                    alt={cat.Nombre_categoria} width="50%" /></td>
+                                <td className="td"><img src={`http://localhost:3000/uploads/${cat.Imagen_categoria}`}
+                                    alt={cat.Nombre_categoria} width="50%" className="Imagen" /></td>
                                 <td>{cat.Nombre_categoria}</td>
                                 <td>
-                                    <Link to={`/categoria/${cat.Nombre_categoria}`}>{cat.Nombre_categoria}</Link>
+                                    <Link to={`/categoria/${cat.Nombre_categoria}`} className="L-subcategoria">{cat.Nombre_categoria}</Link>
                                 </td>
                                 <td>
                                     <Link to={`/editar/categoria/${cat.id}`}>
@@ -89,7 +111,7 @@ export default function ListarCategorias(){
                                     </Link>
                                 </td>
                                 <td>
-                                    <button className="btn btn-danger btn-sm d-flex justify-content-center align-items-center mx-auto">
+                                    <button className="btn btn-danger btn-sm d-flex justify-content-center align-items-center mx-auto" onClick={() => deleteCate(cat.id)}>
                                         <i className='bx bx-trash'></i>
                                     </button>
                                 </td>        

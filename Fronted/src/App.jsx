@@ -60,13 +60,14 @@ export default function App(){
           {/* Rutas normales */}
           <Route path="Categorias" element={<Categorias />} />
           <Route path="Categorias/Listado" element={<ListarCategorias />} />
+          <Route path="/Subcategorias" element={<Subcategoria />} />
 
           {/* Ruta para ir a la subcategoria deseada */}
           <Route path="Categoria/:nombreCategoria" element={<Subcategoria />} />
 
           {/* Rutas para elejir que va agregar y que va editar */}
           <Route path="agregar/:tipo" element={<Agregar />} />
-          <Route path="editar/:tipo" element={<Editar />} />
+          <Route path="editar/:tipo/:id" element={<Editar />} />
           
           
         </Route>

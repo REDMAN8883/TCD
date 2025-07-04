@@ -6,7 +6,6 @@ const path = require('path'); // Decimos que el path va ser "/".
 console.log('🚀 Iniciando servidor...');
 // llamamos a las rutas.
 const categoriasRoutes = require('./routes/Categorias.routes');
-console.log('Rutas cargadas:', categoriasRoutes);
 const subcategoriasRoutes = require('./routes/Subcategorias.routes');
 const productosRoutes = require('./routes/Productos.routes');
 
@@ -14,12 +13,13 @@ app.use(cors());
 app.use(express.json()); // Creo que aca la informacion va ser en tipo JSON.
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-console.log('📋 Configurando rutas...');
+
 
 //Montamos las rutas.
 app.use('/api/categorias', categoriasRoutes);
-app.use('/api/Subcategorias', subcategoriasRoutes);
+app.use('/api/subcategorias', subcategoriasRoutes);
 app.use('/api/Productos', productosRoutes);
+
 
 console.log('✅ Rutas configuradas');
 

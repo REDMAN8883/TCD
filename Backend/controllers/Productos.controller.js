@@ -4,7 +4,7 @@ const db = require('../config/db');
 const crearProductoPaquetes = (req, res) => {
     const { Imagen_producto, Nombre_producto, Precio, Descripcion, Codigo_de_barras, Stock, id_SubCategorias, id_Proveedor} = req.body;
     const query = 
-        `INSERT INTO ProductosPaquetes (Imagen_producto, Nombre_producto, Precio, Descripcion, Codigo_de_barras, Stock, id_SubCategrias, id_Proveedor)
+        `INSERT INTO ProductosPaquete (Imagen_producto, Nombre_producto, Precio, Descripcion, Codigo_de_barras, Stock, id_SubCategrias, id_Proveedor)
         VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)`;
     const values = [ Imagen_producto, Nombre_producto, Precio, Descripcion, Codigo_de_barras, Stock, id_SubCategorias, id_Proveedor ];
 
@@ -30,7 +30,7 @@ const crearProductoGramaje = (req, res) => {
 
 // Listamos todas los productos en paquetes exitentes.
 const listarProductosPaquetes = (req, res) => {
-    db.query("SELECT * FROM ProductosPaquetes", (err, rows) => {
+    db.query("SELECT * FROM ProductosPaquete", (err, rows) => {
         if(err) res.status(500).json({ error: err.message });
         res.status(200).json(rows); // enviar los datos
     });
@@ -48,15 +48,15 @@ const listarProductosGramaje = (req, res) => {
 const actualizarProductosPaquetes = (req, res) => {
     const { id } = req.params;
     const { Imagen_producto, Nombre_producto, Precio, Descripcion, Codigo_de_barras, Stock, id_SubCategrias, id_Proveedor } = req.body;
-    const query = 
-        `UPDATE ProductosPaquetes
-        SET Imagen_producto=?, Imagen_producto=?, Nombre_producto=?, Precio=?, Descripcion=?, Codigo_de_barras=?, Stock=?, id_SubCategrias=?, id_Proveedor=?
+    const query = `
+        UPDATE ProductosPaquete
+        SET Imagen_producto=?, Nombre_producto=?, Precio=?, Descripcion=?, Codigo_de_barras=?, Stock=?, id_SubCategrias=?, id_Proveedor=?
         WHERE id=?`;
-    const values = { Imagen_producto, Nombre_producto, Precio, Descripcion, Codigo_de_barras, Stock, id_SubCategrias, id_Proveedor};
+    const values = [ Imagen_producto, Nombre_producto, Precio, Descripcion, Codigo_de_barras, Stock, id_SubCategrias, id_Proveedor, id ];
 
-    db.qeury(query, values, (err, res) => {
-        if(err) return res.status(500).json({ error: err.message });
-        res.status(201).json({ error: err.message });
+    db.query(query, values, (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.status(200).json({ message: "Producto actualizado correctamente" });
     });
 };
 
@@ -70,7 +70,7 @@ const actualizarProductosGramaje = (req, res) => {
         WHERE id=?`;
     const values = {Imagen_producto, Nombre_producto, Kilogramos, Precio_kilogramos, Libras, Precio_libras, Descripcion, id_SubCategorias, id_ProductosPaquetes, id};
 
-    db.qeury(query, values, (err, res) => {
+    db.query(query, values, (err, res) => {
         if(err) return res.status(500).json({ error: err.message });
         res.status(201).json({ error: err.message });
     });

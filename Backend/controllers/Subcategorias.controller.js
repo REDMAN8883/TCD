@@ -3,12 +3,12 @@ const db = require('../config/db');
 
 // Creamos las Subcategorias.
 const crearSubcategorias = (req, res) =>{
-    const { nombre_subcategoria, tipo_subcategoria, descripcion, id_Categorias } = req.body;
+    const { Nombre_Subcategoria,  Descripcion, id_Categorias} = req.body;
     const query = 
-        `INSERT INTO SubCategorias ( Nombre_subcategoria, tipo_ctageoria, Descripcion, id_Categorias) 
+        `INSERT INTO SubCategorias ( Nombre_Subcategoria,  Descripcion, id_Categorias) 
         VALUES ( ?, ?, ? )`; 
-    const values = [nombre_subcategoria, tipo_subcategoria, descripcion, id_Categorias];
-
+    const values = [Nombre_Subcategoria,  Descripcion, id_Categorias];
+ 
     db.query(query, values, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         res.status(201).json({id: result.insertId });
@@ -16,7 +16,7 @@ const crearSubcategorias = (req, res) =>{
 };
 
 // Listamos todas las subcategorias exitentes 
-const listarSubcatgeorias = (req, res) => {
+const listarSubcategorias = (req, res) => {
     db.query("SELECT * FROM SubCategorias", (err, rows) => {
         if (err) return res.status(500).json({ erro: err.message });
         res.status(200).json(rows); // enviar los datos
@@ -30,7 +30,8 @@ const actualizarSubcategorias = (req, res) => {
     const { nombre_subcategoria, tipo_categoria, descripcion, id_Categorias} = req.body;
     const query = 
         `UPDATE SubCategorias 
-        SET Nombre_subcategoria=?, Tipo_categoria=?, Descripcion, id_Categorias`;
+        SET Nombre_subcategoria=?, Tipo_categoria=?, Descripcion=?, id_Categorias
+        WHERE id=?`;
     const values = [nombre_subcategoria, tipo_categoria, descripcion, id_Categorias, id];
 
     db.query(query, values, (err, result) => {
@@ -40,18 +41,18 @@ const actualizarSubcategorias = (req, res) => {
 };
 
 // Eliminamos la subcategorias dependiendo del id.
-const eliminarSubcategorias = (req, res) =>{
-    const { id } = req.params;
-    db.query("DELETE FROM SubCategorias WHERE id =?", [id], (err) => {
-        if(err) return res.status(500).json({ error: err.message });
-        res.json({message: 'La subcategoria ha sido eliminado exitosamente'});
+const eliminarSubcategorias = (req, res) => {
+    const {id} = req.params;
+    db.query("UPDATE SubCategorias SET activo = 0 WHERE id =?", [id], (err) =>{  // Usamo el soft delete para desactivar y no eliminar. 
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({message: 'La categoria ha sido desactivada (soft delete).' });
     });
 };
 
 // EXportamos lo modulos.
 module.exports = {
     crearSubcategorias,
-    listarSubcatgeorias,
+    listarSubcategorias,
     actualizarSubcategorias,
     eliminarSubcategorias
 };
