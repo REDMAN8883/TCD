@@ -51,13 +51,8 @@ export default function AgregarSubcategoria(){
         try {
             const response = await axios.post('http://localhost:3000/api/subcategorias', values);
                 console.log('Subcategoría guardada:', response.data);
-                navigate('/Subcategorias', {
+                navigate(`/Categoria/${values.id_Categorias}`, {
                     state: { message: 'Subcategoría creada con éxito' }
-            });
-
-            console.log('Categoria guardada:', response.data); // Son los datos devueltos por el servidor.
-            navigate('/Subcategorias', {
-                state: { message: 'Categoria creada con exito' }
             });
         } catch (err){ // Se capturan errores de las peticiones.
             console.error('Error al guardar', err);

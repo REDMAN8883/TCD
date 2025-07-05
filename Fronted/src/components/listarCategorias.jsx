@@ -101,7 +101,7 @@ export default function ListarCategorias(){
                                     alt={cat.Nombre_categoria} width="50%" className="Imagen" /></td>
                                 <td>{cat.Nombre_categoria}</td>
                                 <td>
-                                    <Link to={`/categoria/${cat.Nombre_categoria}`} className="L-subcategoria">{cat.Nombre_categoria}</Link>
+                                    <Link to={`/categoria/${cat.id}`} className="L-subcategoria">{cat.Nombre_categoria}</Link>
                                 </td>
                                 <td>
                                     <Link to={`/editar/categoria/${cat.id}`}>
@@ -122,7 +122,7 @@ export default function ListarCategorias(){
                 </section>  
                 {/* Boton para regresar a la pagina anterior */}
                 <div className='regresar'>
-                    <button className="Regresar" onClick={() => navigate(-1)}>Atras</button>
+                    <button className="Regresar" onClick={() => navigate('/Categorias')}>Regresar</button>
                 </div>              
             </main>
         </>

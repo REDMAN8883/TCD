@@ -17,7 +17,7 @@ const crearSubcategorias = (req, res) =>{
 
 // Listamos todas las subcategorias exitentes 
 const listarSubcategorias = (req, res) => {
-    db.query("SELECT * FROM SubCategorias", (err, rows) => {
+    db.query("SELECT * FROM SubCategorias WHERE activo = 1", (err, rows) => {
         if (err) return res.status(500).json({ erro: err.message });
         res.status(200).json(rows); // enviar los datos
 
@@ -27,16 +27,27 @@ const listarSubcategorias = (req, res) => {
 // Actualizamos las subcategorias dependiendo del id.
 const actualizarSubcategorias = (req, res) => {
     const { id } = req.params;
-    const { nombre_subcategoria, tipo_categoria, descripcion, id_Categorias} = req.body;
+    const { Nombre_Subcategoria, Descripcion, id_Categorias } = req.body;
+
     const query = 
         `UPDATE SubCategorias 
-        SET Nombre_subcategoria=?, Tipo_categoria=?, Descripcion=?, id_Categorias
-        WHERE id=?`;
-    const values = [nombre_subcategoria, tipo_categoria, descripcion, id_Categorias, id];
+         SET Nombre_Subcategoria = ?, Descripcion = ?, id_Categorias = ?
+         WHERE id = ?`;
+    const values = [Nombre_Subcategoria, Descripcion, id_Categorias, id];
 
     db.query(query, values, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.status(201).json({ error: err.message });
+        res.status(200).json({ mensaje: "Subcategoría actualizada correctamente" });
+    });
+};
+
+const obtenerSubcategoriaPorId = (req, res) => {
+    const { id } = req.params;
+    const query = "SELECT * FROM SubCategorias WHERE id = ? AND activo = 1";
+    db.query(query, [id], (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (results.length === 0) return res.status(404).json({ mensaje: "Subcategoría no encontrada" });
+        res.status(200).json(results[0]);
     });
 };
 
@@ -54,5 +65,6 @@ module.exports = {
     crearSubcategorias,
     listarSubcategorias,
     actualizarSubcategorias,
+    obtenerSubcategoriaPorId,
     eliminarSubcategorias
 };

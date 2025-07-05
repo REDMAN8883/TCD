@@ -26,7 +26,6 @@ console.log('✅ Rutas configuradas');
 // Corremos todo el backend en el puerto 3000.
 app.listen(3000, () => {
     console.log('🌐 Servidor backend corriendo en: http://localhost:3000');
-    console.log('📍 Ruta de categorías disponible en: http://localhost:3000/api/categorias');
 })
 
 
