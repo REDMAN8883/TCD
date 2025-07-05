@@ -1,0 +1,74 @@
+:root {
+  --blanco: #fffce8;
+  --rojo: #dd403a;
+  --negro: #3e363f;
+}
+
+.ingresoventas-contenedor-dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: rgb(241, 238, 238);
+  padding: 1.5rem;
+  gap: 1.5rem;
+  overflow-x: hidden;
+  border-radius: 13px;
+  box-sizing: border-box;
+}
+
+.ingresoventas-contenido-principal {
+  flex: 1;
+  padding: 20px;
+  width: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+}
+
+.ingresoventas-titulo h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-radius: 10px 60px;
+  background: linear-gradient(to right, #7df1c4, #46886f);
+  height: 80px;
+  line-height: 80px;
+  border: 2px solid #000;
+  width: 100%;
+}
+
+.ingresoventas-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.ingresoventas-card {
+  background-color: #e8f5e9;
+  color: #ed9527;
+  height: 100px;
+  width: 70%;
+  text-align: center;
+  padding: 9px;
+  border-radius: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  border-top: 2px solid #46886f;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.ingresoventas-card:hover {
+  background-color: #46886f;
+  color: var(--blanco);
+}
+
+.ingresoventas-card .material-icons {
+  font-size: 40px;
+  margin-bottom: 4px;
+}
+
+.ingresoventas-card h3 {
+  font-size: 22px;
+  font-weight: 400;
+}
