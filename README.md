@@ -276,7 +276,7 @@ npx expo export:web
 
 ## 🧑‍🤝‍🧑 Autores
 
-- **Brayan Stiven Herrera Mateus** – *Análisis y Diseño*
+- **Brayan Stiven Herrera Mateus** – *Análisis, Diseño y Desarrollo*
 - **Samuel Cuida Esquivel** – *Desarrollo Frontend y Backend*
 - **Julian Daniel Beltran Bustos** – *Documentación y desarrollo general*
 - **Johan Daniel Miranda Moreno** – *Documentación y desarrollo general*
